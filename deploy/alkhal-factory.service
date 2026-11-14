@@ -1,0 +1,23 @@
+[Unit]
+Description=AlKhal Bot Factory (storefront + runner + broadcast + backups)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=alkhal
+WorkingDirectory=/opt/alkhal-factory
+EnvironmentFile=/opt/alkhal-factory/.env
+ExecStart=/opt/alkhal-factory/venv/bin/python run.py
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/opt/alkhal-factory/data /opt/alkhal-factory/releases
+MemoryMax=1G
+TasksMax=512
+LimitNOFILE=8192
+
+[Install]
+WantedBy=multi-user.target
